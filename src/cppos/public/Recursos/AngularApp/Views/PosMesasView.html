@@ -1,0 +1,89 @@
+﻿<style>
+    .icono-mesa {
+        font-size:70px;
+        padding-top:-30px;
+    }
+
+   /* // 1: Mesa / 2: Retiro en local / 3: Despacho a domicilio */
+
+    .pedidotipo-mesa, .pedidotipo-mesa-activa, .pedidotipo-retiro, .pedidotipo-despacho {
+        color: white;
+    }
+
+    .pedidotipo-mesa {
+        background-color: #B8DDC2;
+    }
+
+    .pedidotipo-mesa-activa {
+        background-color: #00a65a;
+    }
+
+    .pedidotipo-retiro {
+        background-color: #0050A6;
+    }
+
+    .pedidotipo-despacho {
+        background-color: #EEBF00;
+    }
+
+    .footer-sec {
+        text-align:center;
+    }
+
+    .btn-footer {
+        height:50px;
+        font-weight: bold;
+        font-size:18px;
+    }
+
+</style>
+<div ng-include src="'/Store/Header'"></div>
+
+<div class="content">
+    
+    
+<div ng-include src="'/Store/Menu'"></div>
+    
+<div class="row">
+    <div class="col-md-12">
+<div class="box box-default">
+    <div class="box-header with-border">
+                  <h2 class="box-title">Mesas</h2>
+                </div>
+    <div class="box-body">
+
+
+
+
+
+    <a href="#/Pedido" class="col-lg-2 col-xs-2 col-md-2" ng-repeat="mesa in mesas track by $index">
+
+              <!-- small box -->
+              <div class="small-box {{mesa.TipoPedido==0 && 'pedidotipo-mesa' }} {{mesa.TipoPedido==1 && 'pedidotipo-mesa-activa' }} {{mesa.TipoPedido==2 && 'pedidotipo-retiro' }} {{mesa.TipoPedido==3 && 'pedidotipo-despacho' }} ">
+                <div class="inner">
+                  <h4><b>{{ mesa.Descripcion }}</b></h4>
+                  <p>Pedido N8734</p>
+                </div>
+              </div>
+            </a>
+
+
+
+        </div>
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-md-6 footer-sec">
+                <button class="btn col-md-12 btn-footer bg-green">+ A DOMICILIO</button>
+            </div>
+            <div class="col-md-6 footer-sec">
+                <button class="btn col-md-12 btn-footer bg-green">+ RETIRO EN LOCAL</button>
+            </div>
+        </div>
+                
+            
+    </div>
+</div>
+
+    </div>
+    </div>
+</div>

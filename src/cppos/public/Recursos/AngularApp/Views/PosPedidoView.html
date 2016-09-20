@@ -1,0 +1,136 @@
+﻿<style>
+    .info-box-contenido {
+        vertical-align: middle;
+        padding:5px;
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    .btn-producto {
+        margin:0px;
+    }
+
+    .tabla-totales {
+        text-align: right;
+    }
+
+    .btn-subtotales {
+        border-color:white;
+    }
+
+    .input-cantidad {
+        width:30px;
+    }
+
+</style>
+<div ng-include src="'/Pos/Header'"></div>
+
+<div class="content">
+    
+    
+<div ng-include src="'/Pos/Menu'"></div>
+
+
+<div class="row" style="margin-top: 10px;">
+    <div class="col-md-4">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                  <h3 class="box-title"><b>Pedido #45</b></h3>
+                  <h3 class="box-title pull-right"><b>Mesa #15</b></h3>
+
+            </div>
+              <div class="box-body">
+                  
+                  <table class="table table-bordered table-hover dataTable">
+                      <thead>
+                          <tr>
+                              <th>
+                                  Producto
+                              </th>
+                              <th>
+                                  V. Unit.
+                              </th>
+                              <th>
+                                  Cant.
+                              </th>
+                              <th>
+                                  Tot.
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="producto_venta in productos_venta track by $index">
+                              <td>
+                                {{producto_venta.Nombre}}
+                              </td>
+                              <td>
+                                ${{producto_venta.PrecioUnitario | number:0}}
+                              </td>
+                              <td>
+                               
+                                  <button ng-click="cantidadDisminuir(producto_venta)" type="button" class="btn btn-default btn-xs"><i class="fa fa-minus-circle"></i></button>
+                                   <input ng-model="producto_venta.Cantidad" class="input-cantidad" />
+                                  <button ng-click="cantidadAumentar(producto_venta)" type="button" class="btn btn-default btn-xs"><i class="fa fa-plus-circle"></i></button>
+
+                              </td>
+                              <td>
+                                ${{producto_venta.PrecioUnitario*producto_venta.Cantidad | number:0}}
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+
+
+                  <!-- TOTALES -->
+
+                  <div class="table-responsive">
+                <table class="table tabla-totales">
+                  <tbody><tr>
+                    <th>Subtotal:</th>
+                    <td>${{ getSubTotal() | number:0}}</td>
+                  </tr>
+                  <tr>
+                    <th>Propina sugerida (10%)</th>
+                    <td>${{ getPropina() | number:0}}</td>
+                  </tr>
+                  <tr>
+                    <th>Total con propina:</th>
+                    <td>${{ getTotal() | number:0}}</td>
+                  </tr>
+                </tbody></table>
+              </div>
+
+                      <a class="btn btn-success col-md-4 btn-subtotales">Eliminar</a>
+                      <a class="btn btn-default col-md-4 btn-subtotales">Imprimir</a>
+                      <a class="btn btn-default col-md-4 btn-subtotales" ng-click="confirmarVenta(producto)">Confirmar</a>
+
+
+
+              </div><!-- /.box-body -->
+            </div>
+    </div>
+    <div class="col-md-8">
+        <div class="box box-default">
+              <div class="box-header with-border">
+                  <h3 class="box-title"><b>Productos</b></h3>
+            </div>
+              <div class="box-body">
+                  
+                  <a 
+                      ng-repeat="producto in productos track by $index" 
+                      class="btn btn-app col-md-3 btn-producto {{producto.Tipo==0 && 'bg-yellow' }} {{producto.Tipo==1 && 'bg-blue' }} {{producto.Tipo==2 && 'bg-aqua' }}" 
+                      
+                      
+                      ng-click="itemClick(producto)"
+                      >
+                    <label>{{producto.Nombre}}<span ng-show="producto.Tipo == 2"><br />${{producto.PrecioUnitario}}</span></label>
+                  </a>
+
+                  
+
+
+                </div>
+            </div>
+    </div>
+</div>
+    </div>
